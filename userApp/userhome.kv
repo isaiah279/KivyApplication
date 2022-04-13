@@ -1,0 +1,211 @@
+<Home>:
+ContentNavigationDrawer:
+    orientation: "vertical"
+    padding: "0dp"
+    spacing: "0dp"
+    AnchorLayout:
+        #anchor_x: "left"
+        size_hint: None,None
+        height: avatar.height
+        Image:
+            id: avatar
+            #size_hint: None, None
+            size: "200dp", "200dp"
+
+            source: "7-Cs-Caregiving.jpg"
+
+    ScrollView:
+
+        MDList:
+            OneLineListItem:
+                text: "Home"
+                icon:"home"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr1"
+
+            OneLineListItem:
+                text: "About us"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr2"
+            OneLineListItem:
+                text: "services"
+                icon:"serves"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr3"
+            OneLineListItem:
+                text: "comment"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "scr4"
+            OneLineListItem:
+                text: "Announcement"
+                on_press:
+                    app.root.nav_drawer.set_state("close")
+                    app.root.screen_manager.current = "scr5"
+    Screen:
+        MDBoxLayout
+        MDToolbar:
+            id: toolbar
+            pos_hint: {"top": 1}
+            elevation: 10
+            title: "Save A life"
+            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+            right_action_items: [["dots-vertical", lambda x: app.color_theme_callback()]]
+        MDNavigationLayout:
+            x: toolbar.height
+
+            ScreenManager:
+                id: screen_manager
+                Screen:
+                    name: "scr1"
+                    MDBoxLayout:
+                    MDLabel:
+                        text:"Save a life"
+                        pos_hint:{"center_y":.85}
+                        font_style:"H6"
+                        halign:"center"
+                        theme_text_color:"Custom"
+                        text_color:0,0,0,1
+                    MDRoundFlatButton:
+                        text:"services"
+                        height:'300dp'
+                        size_hint_x:.7
+                        pos_hint:{"center_x":.5,"center_y":.75}
+                    MDRoundFlatButton:
+                        text:"About us"
+                        size_hint_x:.7
+                        pos_hint:{"center_x":.5,"center_y":.65}
+                        icon: 'arrow-left'
+
+                        ######press to the page#################
+
+                    MDRoundFlatButton:
+                        text:"Book An Appointment"
+                        size_hint:.7,None
+                        pos_hint:{"center_x":.5,"center_y":.55}
+
+                    MDRoundFlatButton:
+                        text:"date"
+                        size_hint:.7,None
+                        pos_hint:{"center_x":.5,"center_y":.45}
+                        on_release: app.show_date_picker()
+
+
+                Screen:
+                    name: "scr2"
+                    MDLabel:
+                        text:"About The App"
+                        pos_hint:{"center_x":.5,"center_y":85}
+                    MDLabel:
+                        text:
+                            """With the production of the Model T automobile,
+                            Henry Ford had an unforeseen and tremendous
+                            impact on American life. He became regard
+                            With the production of the Model T automobile,
+                            Henry Ford had an unforeseen and tremendous
+                            impact on American life. He became regarded
+                            as an apt symbol of the transition from an
+                            agricultural to an industrial America."""
+                        halign: "left"
+                        padding_x:40
+                Screen:
+                    name: "scr3"
+
+                    MDLabel:
+                        text:"Provide Details"
+                        font_style:'H5'
+                        pos_hint:{'center_x':.5,'center_y':.82}
+                        halign:"center"
+                    MDTextField:
+                        id:name
+                        hint_text: " Name:"
+                        helper_text: "Text is always here"
+                        pos_hint:{'center_x':.5,'center_y':.75}
+                        size_hint: .5, None
+                        height: "2dp"
+                        mode: "rectangle"
+                        #halign:'center'
+                    MDTextField:
+                        id:Email
+                        hint_text: "Enter Email :"
+                        helper_text: "Text is always here"
+                        pos_hint:{'center_x':.5,'center_y':.65}
+                        size_hint: .5, None
+                        height: "2dp"
+                        mode: "rectangle"
+                    MDTextField:
+                        id:phoneNumber
+                        hint_text: "Phone Number:"
+                        helper_text: "Text is always here"
+                        pos_hint:{'center_x':.5,'center_y':.55}
+                        size_hint: .5, None
+                        height: "2dp"
+                        mode: "rectangle"
+                    MDTextField:
+                        id:location
+                        hint_text: "Location :"
+                        helper_text: "Text is always here"
+                        pos_hint:{'center_x':.5,'center_y':.45}
+                        size_hint: .5, None
+                        height: "2dp"
+                        mode: "rectangle"
+                    MDTextField:
+                        id:issue
+                        hint_text: " issue.... :"
+                        helper_text: "Text is always here"
+                        pos_hint:{'center_x':.5,'center_y':.28}
+                        size_hint: .5, None
+                        height: "2dp"
+                        mode: "rectangle"
+                        multiline: True
+
+                    MDRectangleFlatButton:
+                        text:"SUBMIT"
+                        pos_hint:{"center_x":.5,"center_y":.1}
+                        on_press:app.userinput(phoneNumber.text,Email.text,name.text,location.text,issue.text)
+                Screen:
+                    name: "scr4"
+
+                    MDLabel:
+                        text: "Comment"
+                        align: "center"
+                        pos_hint:{'center_x':.5,'center_y':.75}
+
+                    MDTextField:
+                        id:comment
+                        hint_text: "  comment:"
+                        helper_text: "Text is always here"
+                        pos_hint:{'center_x':.33,'center_y':.55}
+                        size_hint:.4,None
+                        height: "2dp"
+                        mode: "rectangle"
+
+                        multiline:True
+                    MDRoundFlatButton:
+                        id:send_comment
+                        text:"SUBMIT"
+                        pos_hint:{"center_x":.5,"center_y":.1}
+                        on_press:app.userinput(comment.text)
+                Screen:
+                    name: "scr5"
+                    MDLabel:
+                        text:"Announcements"
+                        font_style:'H5'
+                        pos_hint:{'center_x':.5,'center_y':.82}
+                        halign:"center"
+                        on_press:
+                    MDRoundFlatButton:
+                        id:view_information
+                        text:" information"
+                        pos_hint:{"center_x":.5,"center_y":.75}
+                        size_hint:.5,None
+                        on_release:app.view_information(view_information.text)
+            MDNavigationDrawer:
+                id: nav_drawer
+                ContentNavigationDrawer:
+                    screen_manager: screen_manager
+                    nav_drawer: nav_drawer
+

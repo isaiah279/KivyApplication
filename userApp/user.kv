@@ -1,0 +1,124 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+<Home>:
+    MDScreen:
+        MDBottomNavigation:
+            md_bg_color: 1, 0, 1, 1
+            user_font_size: "34sp"
+            theme_text_color: "Custom"
+            #panel_color: get_color_from_hex("#eeeaea")
+            #panel_color: rgba('262626')
+            #selected_color_background: get_color_from_hex("#97acf8")
+            text_color_active: 0, 0, 0, 1
+            MDBottomNavigationItem:
+                text_color_normal: 1, 0, 1, 1
+                name: 'screen 1'
+                text: 'Home'
+                icon:"home"
+                badge_icon: "numeric-10"
+                Image:
+                    id: avatar
+                    size_hint: 1, 1
+                    #source: "7-Cs-Caregiving.jpg"
+                MDLabel:
+                    text: ''
+                    halign: 'center'
+            MDBottomNavigationItem:
+                text_color_active: 0, 0, 0, 1
+                text_color_normal: 1, 0, 1, 1
+                name: 'screen 2'
+                text: 'service'
+                icon:"face-agent"
+                badge_icon: "numeric-5"
+                MDTextField:
+                    id:name
+                    hint_text: " Name:"
+                    helper_text: "Text is always here"
+                    pos_hint:{'center_x':.5,'center_y':.75}
+                    size_hint: .5, None
+                    height: ".9dp"
+                    mode: "rectangle"
+                    #halign:'center'
+                MDTextField:
+                    id:Email
+                    hint_text: "Enter Email :"
+                    helper_text: "Text is always here"
+                    pos_hint:{'center_x':.5,'center_y':.60}
+                    size_hint: .5, None
+                    height: ".9dp"
+                    mode: "rectangle"
+                MDTextField:
+                    id:phoneNumber
+                    hint_text: "Phone Number:"
+                    helper_text: "Text is always here"
+                    pos_hint:{'center_x':.5,'center_y':.47}
+                    size_hint: .5, None
+                    height: ".9dp"
+                    mode: "rectangle"
+                MDTextField:
+                    id:location
+                    hint_text: "Location :"
+                    helper_text: "Text is always here"
+                    pos_hint:{'center_x':.5,'center_y':.33}
+                    size_hint: .5, None
+                    height: ".9dp"
+                    mode: "rectangle"
+                MDTextField:
+                    id:issue
+                    hint_text: " issue.... :"
+                    helper_text: "Text is always here"
+                    pos_hint:{'center_x':.5,'center_y':.20}
+                    size_hint: .5, None
+                    height: "10"
+                    mode: "rectangle"
+                    multiline: True
+                MDTextButton:
+                    text:"Submit"
+                    pos_hint:{"center_x":.5,"center_y":.05}
+                    on_press:app.userinput(phoneNumber.text,Email.text,name.text,location.text,issue.text)
+            MDBottomNavigationItem:
+                text_color_active: 0, 0, 0, 1
+                text_color_normal: 1, 0, 1, 1
+                name: 'screen 3'
+                text: 'About'
+                icon: 'information'
+                MDLabel:
+                    text:"""Enter your details in the space provided in the service tab and submit , ones you have subimted the dtails you cant delete thr details"""
+                    zhalign:"left"
+            MDBottomNavigationItem:
+                text_color_active: 0, 0, 0, 1
+                text_color_normal: 1, 0, 1, 1
+                name: 'screen 4'
+                text: 'comment'
+                icon: 'comment'
+                MDTextField:
+                    id:comment
+                    hint_text: "Helper text on focus"
+                    helper_text: "Type and Send"
+                    helper_text_mode: "on_focus"
+                    multiline: True
+                MDIconButton:
+                    id:comment
+                    text:"send"
+                    icon:"send"
+                    pos_hint: {"x":.8, "top":.15}
+                    on_press:app.userinput(comment.text,'','','','')
+
+            MDBottomNavigationItem:
+                text_color_active: 0, 0, 0, 1
+                text_color_normal: 1, 0, 1, 1
+                name: 'screen 5'
+                text: 'view'
+                icon: 'cog-outline'
+                MDLabel:
+                    right_action_items: [["dots-vertical", lambda x: app.color_theme_callback()]]
+                    text: 'settings'
+                    halign: 'center'
+    BoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            title: "Home Care"
+            left_action_items: [["menu"]]
+            top_right_action_items: [["dots-vertical", lambda x: app.show_date_picker()]]
+            right_action_items: [["cog-outline", lambda x: app.color_theme_callback()]]
+        MDLabel:
+            halign: "center"
